@@ -31,8 +31,10 @@ const Post = ({ post, setCurrentId }) => {
     <Card className={classes.card}>
       <img src={post.selectedFile} title={post.title} alt="post" />
       <div className={classes.flex}>
-        <Typography variant="h7">By: {post.name}</Typography>
-        <Typography variant="h7">{moment(post.createdAt).fromNow()}</Typography>
+        <Typography variant="body1">By: {post.name}</Typography>
+        <Typography variant="body1">
+          {moment(post.createdAt).fromNow()}
+        </Typography>
       </div>
 
       <Typography
@@ -43,7 +45,7 @@ const Post = ({ post, setCurrentId }) => {
       >
         {post.title}
       </Typography>
-      <Typography className={classes.title} variant="h7">
+      <Typography className={classes.title} variant="body1">
         {post.message}
       </Typography>
       <div className={classes.details}>

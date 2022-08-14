@@ -7,7 +7,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import React, { useState } from "react";
+import { gapi } from "gapi-script";
+import React, { useEffect, useState } from "react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +27,18 @@ const initialState = {
 };
 
 const Auth = () => {
+  useEffect(() => {
+    console.log("here");
+    console.log(process.env.REACT_APP_CLIENTID);
+    function start() {
+      gapi.client.init({
+        clientId: process.env.REACT_APP_CLIENTID,
+        scope: "",
+      });
+    }
+    gapi.load("client:auth2", start);
+  });
+
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
@@ -139,7 +152,7 @@ const Auth = () => {
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
           <GoogleLogin
-            clientId="517061940525-kippp3q6k8afkdo271eompc89lmpa5bn.apps.googleusercontent.com"
+            clientId={process.env.REACT_APP_CLIENTID}
             render={(renderProps) => (
               <Button
                 className={classes.googleButton}
@@ -156,6 +169,7 @@ const Auth = () => {
             onSuccess={googleSuccess}
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
+            isSignedIn={true}
           />
           <Grid container justifyContent="flex-end">
             <Grid item>

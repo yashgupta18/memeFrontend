@@ -19,6 +19,7 @@ const Navbar = () => {
     // logout current user
     dispatch({ type: "LOGOUT" });
     navigate("/");
+    localStorage.removeItem("profile");
     setUser(null);
   };
 
