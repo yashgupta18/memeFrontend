@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5001" });
+// const API = axios.create({ baseURL: "http://localhost:5001" });
+// const API = axios.create({ baseURL: "http://xmemesapp.herokuapp.com" });
+const API = axios.create({ baseURL: "http://xmeme-app-mern.herokuapp.com" });
 
 // happens on each req
 API.interceptors.request.use((req) => {
@@ -12,8 +14,6 @@ API.interceptors.request.use((req) => {
 
   return req;
 });
-
-// const url = 'http://localhost:5000/posts';
 
 export const fetchPosts = () => API.get("/posts");
 export const createPost = (newPost) => API.post("/posts", newPost);
