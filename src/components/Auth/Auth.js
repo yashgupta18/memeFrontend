@@ -28,8 +28,6 @@ const initialState = {
 
 const Auth = () => {
   useEffect(() => {
-    console.log("here");
-    console.log(process.env.REACT_APP_CLIENTID);
     function start() {
       gapi.client.init({
         clientId: process.env.REACT_APP_CLIENTID,
@@ -90,7 +88,7 @@ const Auth = () => {
   };
 
   const googleFailure = (error) => {
-    console.log(error);
+    console.error(error);
     console.log("Google Sign in was unsuccessful");
   };
 
