@@ -1,6 +1,11 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
-
-import * as api from '../api/index.js';
+import * as api from "../api/index.js";
+import {
+  CREATE,
+  DELETE,
+  FETCH_ALL,
+  LIKE,
+  UPDATE,
+} from "../constants/actionTypes";
 
 export const getPosts = () => async (dispatch) => {
   try {
