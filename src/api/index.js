@@ -1,9 +1,7 @@
 import axios from "axios";
 
-// const API = axios.create({ baseURL: "https://localhost:5001" });
-// const API = axios.create({ baseURL: "https://xmemesapp.herokuapp.com" });
-const API = axios.create({ baseURL: "https://xmeme-app-mern.herokuapp.com" });
-
+// const API = axios.create({ baseURL: "http://localhost:5001" });
+const API = axios.create({ baseURL: "https://meme-backend.onrender.com" });
 // happens on each req
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {

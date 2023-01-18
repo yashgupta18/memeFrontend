@@ -1,12 +1,24 @@
 import { CircularProgress, Grid } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import Post from "./Post/Post";
+// import { postsMock } from "./postsMock";
 import useStyles from "./styles";
 
 const Posts = ({ setCurrentId }) => {
-  const posts = useSelector((state) => state.posts);
+  const [posts, setPosts] = useState([])
+  const fetchposts = useSelector((state) => state.posts);
+
+  useEffect(() => {
+    setPosts(fetchposts)
+  }, [fetchposts])
+
+  // if (posts.length === 0) {
+  //   console.log({fetchposts});
+  //   setPosts(postsMock)
+  // }
+
   const classes = useStyles();
 
   return !posts.length ? (
