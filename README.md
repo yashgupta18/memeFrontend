@@ -5,7 +5,7 @@ This app is made using Reactjs, Material UI. Users can login via Google/manually
 
 **Tech Stack**- Reactjs, Material UI, NodeJS(Backend API's), MongoDB
 
-[DEPLOYED LINK](https://meme-webapp.netlify.app/)
+[DEPLOYED LINK](https://memes-web-app.netlify.app/)
 
 Learn Reactjs
 [ReactJS Documentation](https://reactjs.org/docs/hello-world.html)
