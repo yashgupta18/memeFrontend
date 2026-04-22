@@ -1,12 +1,15 @@
 import "./index.css";
 
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { applyMiddleware, compose } from "redux";
-import { legacy_createStore as createStore } from "redux";
+import {
+  applyMiddleware,
+  compose,
+  legacy_createStore as createStore,
+} from "redux";
 import thunk from "redux-thunk";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import App from "./App";
 import { reducers } from "./reducers";

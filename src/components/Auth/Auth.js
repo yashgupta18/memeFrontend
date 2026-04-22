@@ -7,14 +7,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 
 import { signin, signup } from "../../actions/auth";
-import Icon from "./icon";
 import Input from "./Input";
 import useStyles from "./styles";
 
