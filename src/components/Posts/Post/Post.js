@@ -40,19 +40,25 @@ const Post = ({ post, setCurrentId }) => {
       <Typography
         className={classes.title}
         gutterBottom
-        variant="h6"
+        variant="body1"
         component="h6"
       >
         {post.title}
       </Typography>
-      <Typography className={classes.title} variant="body1">
-        {post.message}
-      </Typography>
-      <div className={classes.details}>
-        <Typography variant="body2" color="textSecondary" component="h2">
-          {post.tags.map((tag) => `#${tag} `)}
+      {post.message && (
+        <Typography className={classes.message} variant="body2">
+          {post.message}
         </Typography>
-      </div>
+      )}
+      {post.tags && post.tags.some((tag) => tag.trim() !== "") && (
+        <div className={classes.details}>
+          <Typography variant="body2" color="textSecondary" component="h2">
+            {post.tags
+              .filter((tag) => tag.trim() !== "")
+              .map((tag) => `#${tag} `)}
+          </Typography>
+        </div>
+      )}
       <CardActions className={classes.cardActions}>
         <Button
           size="small"

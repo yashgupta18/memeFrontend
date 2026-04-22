@@ -31,7 +31,8 @@ export default makeStyles({
     "& img": {
       width: "100%",
       height: "auto",
-      maxHeight: "400px",
+      maxHeight: "600px",
+      minHeight: "300px",
       objectFit: "cover",
       display: "block",
     },
@@ -39,9 +40,9 @@ export default makeStyles({
   flex: {
     display: "flex",
     justifyContent: "space-between",
-    padding: "12px 16px",
-    fontSize: "0.875rem",
-    color: "#666",
+    padding: "8px 12px",
+    fontSize: "0.75rem",
+    color: "#888",
     borderBottom: "1px solid #f0f0f0",
   },
   overlay: {
@@ -60,15 +61,21 @@ export default makeStyles({
   },
   details: {
     display: "flex",
-    justifyContent: "space-between",
-    padding: "8px 16px",
+    justifyContent: "flex-start",
+    padding: "4px 12px 8px",
     flexWrap: "wrap",
-    gap: "8px",
+    gap: "4px",
   },
   title: {
-    padding: "12px 16px 8px",
+    padding: "8px 12px 4px",
     fontWeight: 600,
+    fontSize: "1rem",
     color: "#333",
+  },
+  message: {
+    padding: "0 12px 4px",
+    fontSize: "0.875rem",
+    color: "#666",
   },
   cardActions: {
     padding: "8px 16px 16px",
