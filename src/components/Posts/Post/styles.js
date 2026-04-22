@@ -31,10 +31,11 @@ export default makeStyles({
     "& img": {
       width: "100%",
       height: "auto",
-      maxHeight: "600px",
-      minHeight: "300px",
-      objectFit: "cover",
+      maxHeight: "500px",
+      objectFit: "contain",
       display: "block",
+      cursor: "pointer",
+      backgroundColor: "#f5f5f5",
     },
   },
   flex: {
