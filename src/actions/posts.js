@@ -6,6 +6,7 @@ import {
   LIKE,
   UPDATE,
 } from "../constants/actionTypes";
+import { notify } from "../context/NotificationContext";
 
 export const getPosts = () => async (dispatch) => {
   try {
@@ -14,6 +15,7 @@ export const getPosts = () => async (dispatch) => {
     dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
     console.log(error.message);
+    notify.error("Failed to load posts");
   }
 };
 
@@ -22,8 +24,10 @@ export const createPost = (post) => async (dispatch) => {
     const { data } = await api.createPost(post);
 
     dispatch({ type: CREATE, payload: data });
+    notify.success("Meme posted successfully! 🎉");
   } catch (error) {
     console.log(error.message);
+    notify.error("Failed to create post");
   }
 };
 
@@ -32,8 +36,10 @@ export const updatePost = (id, post) => async (dispatch) => {
     const { data } = await api.updatePost(id, post);
 
     dispatch({ type: UPDATE, payload: data });
+    notify.success("Post updated successfully!");
   } catch (error) {
     console.log(error.message);
+    notify.error("Failed to update post");
   }
 };
 
@@ -44,6 +50,7 @@ export const likePost = (id) => async (dispatch) => {
     dispatch({ type: LIKE, payload: data });
   } catch (error) {
     console.log(error.message);
+    notify.error("Failed to like post");
   }
 };
 
@@ -52,7 +59,9 @@ export const deletePost = (id) => async (dispatch) => {
     await api.deletePost(id);
 
     dispatch({ type: DELETE, payload: id });
+    notify.success("Post deleted successfully");
   } catch (error) {
     console.log(error.message);
+    notify.error("Failed to delete post");
   }
 };

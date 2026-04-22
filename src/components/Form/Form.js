@@ -125,6 +125,24 @@ const Form = ({ currentId, setCurrentId }) => {
             }
           />
         </div>
+        {postData.selectedFile && (
+          <div style={{ marginTop: "16px", marginBottom: "16px" }}>
+            <Typography variant="subtitle2" gutterBottom>
+              Image Preview:
+            </Typography>
+            <img
+              src={postData.selectedFile}
+              alt="preview"
+              style={{
+                width: "100%",
+                maxHeight: "300px",
+                objectFit: "contain",
+                borderRadius: "8px",
+                backgroundColor: "#f5f5f5",
+              }}
+            />
+          </div>
+        )}
         <Button
           className={classes.buttonSubmit}
           variant="contained"
