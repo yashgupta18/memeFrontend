@@ -7,11 +7,11 @@ import {
   Typography,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { gapi } from "gapi-script";
-import React, { useEffect, useState } from "react";
-import { GoogleLogin } from "react-google-login";
+import React, { useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 import { signin, signup } from "../../actions/auth";
 import Icon from "./icon";
@@ -27,16 +27,6 @@ const initialState = {
 };
 
 const Auth = () => {
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: process.env.REACT_APP_CLIENTID,
-        scope: "",
-      });
-    }
-    gapi.load("client:auth2", start);
-  });
-
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
@@ -70,20 +60,19 @@ const Auth = () => {
     setShowPassword(false);
   };
 
-  const googleSuccess = async (res) => {
-    // result of google signin
-    // optional chaining
-    const result = res?.profileObj;
-    const token = res?.tokenId;
+  const googleSuccess = async (credentialResponse) => {
+    // Decode the JWT credential to get user info
+    const token = credentialResponse.credential;
+    const result = jwt_decode(token);
 
     try {
       // send data of user logged in to REACT STORE
       dispatch({ type: "AUTH", data: { result, token } }); //send to auth.js in reducers
 
-      // referesh automatically if user signs in
+      // refresh automatically if user signs in
       navigate("/");
     } catch (error) {
-      console.log(console.error);
+      console.log(error);
     }
   };
 
@@ -149,26 +138,16 @@ const Auth = () => {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
-          <GoogleLogin
-            clientId={process.env.REACT_APP_CLIENTID}
-            render={(renderProps) => (
-              <Button
-                className={classes.googleButton}
-                color="primary"
-                fullWidth
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                startIcon={<Icon />}
-                variant="contained"
-              >
-                Google Sign In
-              </Button>
-            )}
-            onSuccess={googleSuccess}
-            onFailure={googleFailure}
-            cookiePolicy="single_host_origin"
-            isSignedIn={true}
-          />
+          <div style={{ width: "100%", marginTop: "16px" }}>
+            <GoogleLogin
+              onSuccess={googleSuccess}
+              onError={googleFailure}
+              useOneTap
+              theme="filled_blue"
+              size="large"
+              width="100%"
+            />
+          </div>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
