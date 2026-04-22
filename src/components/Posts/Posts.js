@@ -1,29 +1,40 @@
-import { CircularProgress, Grid } from "@material-ui/core";
+import { CircularProgress, Grid, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import Post from "./Post/Post";
-// import { postsMock } from "./postsMock";
 import useStyles from "./styles";
 
 const Posts = ({ setCurrentId }) => {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const fetchposts = useSelector((state) => state.posts);
 
   useEffect(() => {
-    setPosts(fetchposts)
-  }, [fetchposts])
-
-  // if (posts.length === 0) {
-  //   console.log({fetchposts});
-  //   setPosts(postsMock)
-  // }
+    setPosts(fetchposts);
+    // Set loading to false after initial fetch
+    if (fetchposts.length >= 0) {
+      setIsLoading(false);
+    }
+  }, [fetchposts]);
 
   const classes = useStyles();
 
-  return !posts.length ? (
-    <CircularProgress />
-  ) : (
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (!posts.length) {
+    return (
+      <div style={{ textAlign: "center", marginTop: "40px" }}>
+        <Typography variant="h5" color="textSecondary">
+          No memes yet. Be the first to post! 🎉
+        </Typography>
+      </div>
+    );
+  }
+
+  return (
     <Grid
       className={classes.container}
       container

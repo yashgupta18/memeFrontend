@@ -13,8 +13,9 @@ const Form = ({ currentId, setCurrentId }) => {
     tags: "",
     selectedFile: "",
   });
+  const [fileInputKey, setFileInputKey] = useState(Date.now());
   const post = useSelector((state) =>
-    currentId ? state.posts.find((message) => message._id === currentId) : null
+    currentId ? state.posts.find((message) => message._id === currentId) : null,
   );
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -27,6 +28,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const clear = () => {
     setCurrentId(0);
     setPostData({ title: "", message: "", tags: "", selectedFile: "" });
+    setFileInputKey(Date.now()); // Reset file input by changing key
   };
 
   const isEmpty = (obj) => {
@@ -48,13 +50,13 @@ const Form = ({ currentId, setCurrentId }) => {
           ...postData,
           name: user?.result?.name,
           creator: user?.result?.googleId,
-        })
+        }),
       );
       clear();
     } else {
       // if old post is updated
       dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
+        updatePost(currentId, { ...postData, name: user?.result?.name }),
       );
       clear();
     }
@@ -115,6 +117,7 @@ const Form = ({ currentId, setCurrentId }) => {
         />
         <div className={classes.fileInput}>
           <FileBase
+            key={fileInputKey}
             type="file"
             multiple={false}
             onDone={({ base64 }) =>
